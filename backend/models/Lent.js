@@ -84,7 +84,7 @@ module.exports = (sequelize, DataTypes) => {
 		},
 	});
 
-	Lent.deleteLent = (idx) => Lent.delete({
+	Lent.deleteLent = (idx) => Lent.destroy({
 		where: {
 			idx,
 		},

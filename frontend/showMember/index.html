@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="JBooks" content="JBooks">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<link rel="stylesheet" href="index.css">
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+	<script src="./index.js"></script>
+	<title>JBooks</title>
+</head>
+<body>
+	<div class="info">
+		반납을 위해서는 책이름을 클릭해주세요
+	</div>
+	<div class="title" onclick="location.href='http://127.0.0.1:5500/frontend/showMembers/index.html'">
+		
+	</div>
+	<div class="lent_page_container">
+		<a onclick="lentPage()">대출</a>
+	</div>
+	<div class="container">
+		<table class="table">
+			<th>책 이름</th>
+			<th>대출일자</th>
+			<th>반납일자</th>
+			
+			<!-- table dynamic allocation  -->
+		</table>
+	</div>
+</body>
+</html>
+
+<script>
+	showMember();
+	function lentPage () {
+		const { id } = getUrlParams();
+		location.href = `http://127.0.0.1:5500/frontend/lentBook/index.html?id=${id}`;
+	}
+</script>

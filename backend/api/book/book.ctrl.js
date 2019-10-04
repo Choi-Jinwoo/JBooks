@@ -5,9 +5,9 @@ const Validate = require('../../lib/validation');
 exports.rent = async (ctx) => {
 	colorConsole.green('[BOOK] 도서 대여');
 	const { body } = ctx.request;
-
+	
 	try {
-		Validate.validateRent(body);
+		await Validate.validateRent(body);
 	} catch(error) {
 		colorConsole.yellow(error.message);
 		ctx.status = 400;
@@ -17,7 +17,6 @@ exports.rent = async (ctx) => {
 		};
 		return;
 	}
-
 	try {
 		if (!await models.Member.getMember(body.id)) {
 			colorConsole.yellow('회원이 존재하지 않습니다.');
@@ -28,6 +27,7 @@ exports.rent = async (ctx) => {
 			};
 			return;
 		}
+		
 		await models.Lent.createLent(body);
 		ctx.status = 200;
 		ctx.body = {
@@ -47,7 +47,16 @@ exports.rent = async (ctx) => {
 exports.turnIn = async (ctx) => {
 	colorConsole.green('[BOOK] 도서 반납');
 	try {
-		const { idx } = ctx.request;
+		const { idx } = ctx.params;
+		if (!idx) {
+			colorConsole.yellow('idx가 전송되지 않았습니다.');
+			ctx.status = 400;
+			ctx.body = {
+				status: 400,
+				member: '검증 오류입니다.',
+			}
+			return;
+		}
 		if (!await models.Lent.getLent(idx)) {
 			colorConsole.yellow('대여 정보가 존재하지 않습니다.');
 			ctx.status = 204;

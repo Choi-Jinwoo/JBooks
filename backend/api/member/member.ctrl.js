@@ -22,9 +22,9 @@ exports.createMember = async (ctx) => {
 	try {
 		if (await models.Member.getMember(body.id)) {
 			colorConsole.yellow('이미 회원이 존재합니다.');
-			ctx.status = 400;
+			ctx.status = 409;
 			ctx.body = {
-				status: 400,
+				status: 409,
 				message: '이미 회원이 존재합니다.',
 			};
 
@@ -60,6 +60,9 @@ exports.getMembers = async (ctx) => {
 				message: '회원이 존재하지 않습니다.',
 			};
 			return;
+		}
+		for (let i = 0; i < members.length; i++) {
+			members[i].lent = await models.Lent.getLentByMember(members[i].id);
 		}
 		ctx.status = 200;
 		ctx.body = {
