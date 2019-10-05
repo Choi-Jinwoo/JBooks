@@ -8,7 +8,10 @@ const bodyParser = require("koa-bodyparser");
 const colors = require("colors");
 const api = require("./api");
 
-const { PORT } = process.env || { PORT: 3000 };
+let PORT = process.env.PORT;
+if (!PORT) {
+  PORT = "3000";
+}
 
 const app = new Koa();
 const router = new Router();
