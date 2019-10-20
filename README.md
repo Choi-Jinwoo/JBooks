@@ -15,6 +15,11 @@
 >}
 >```
 
+### dotenv
+>```
+>PORT=3000
+>```
+
 ### start
 >```
 >ts-node app.ts

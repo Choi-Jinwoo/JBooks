@@ -3,6 +3,11 @@
     "target": "es5",
     "module": "commonjs",
     // "sourceMap": true,
-    "outDir": "./dist"
+    "outDir": "./dist",
+    "strict": true, /* Enable all strict type-checking options. */
+    "esModuleInterop": false, /* Enables emit interoperability between CommonJS and ES Modules via creation of namespace objects for all imports. Implies 'allowSyntheticDefaultImports'. */
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "strictNullChecks": false
   }
 }
